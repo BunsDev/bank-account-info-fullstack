@@ -18,14 +18,13 @@
     "lint-staged": "^13.0.3",
     "prettier-plugin-solidity": "^1.0.0-beta.24"
   },
-  "husky":
-  {
-    "hooks":{
-      "pre-commit":"lint-staged"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
     }
   },
-  "lint-staged":{
-    "*.{js,json,css,md,html}":[
+  "lint-staged": {
+    "*.{js,json,css,md,html}": [
       "prettier --single-quote --write",
       "git add"
     ]
