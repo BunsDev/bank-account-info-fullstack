@@ -11,9 +11,7 @@ async function main() {
   console.log("datas :",res);
   
   console.log(
-    "deployed Contract Address:",
-    deployedbankinfoContract.address
-  );
+    "deployed Contract Address:",deployedbankinfoContract.address );
 }
 
 main()
