@@ -37,9 +37,7 @@ contract bankinfo{
     {
         mappedbankaccount[msg.sender][_number]=bankaccount(_bank,_branch,_balance,true);
         acNumbercount.push(_number);
-        addresses.push(msg.sender);
-     
-         
+        addresses.push(msg.sender);          
     }
 
 
@@ -65,9 +63,7 @@ contract bankinfo{
             
             if(mappedbankaccount[msg.sender][acNumbercount[i]].exists == true){
             userdata memory newuserdata=userdata(acNumbercount[i],mappedbankaccount[msg.sender][acNumbercount[i]].bank_name,mappedbankaccount[msg.sender][acNumbercount[i]].branch,mappedbankaccount[msg.sender][acNumbercount[i]].balance);
-            muserdata[i]=newuserdata;
-
-          
+            muserdata[i]=newuserdata;         
             
             }
         }
@@ -99,7 +95,7 @@ contract bankinfo{
 
     function tranferAmount(uint _fromAccountNo,uint _balance,address _to,uint _toAccountNo) public 
     {
-        require(mappedbankaccount[msg.sender][_fromAccountNo].balance>_balance,"insufficient balance");
+        require(mappedbankaccount[msg.sender][_fromAccountNo].balance>=_balance,"insufficient balance");
         mappedbankaccount[_to][_toAccountNo].balance+=_balance;
         mappedbankaccount[msg.sender][_fromAccountNo].balance-=_balance;
 

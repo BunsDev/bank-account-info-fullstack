@@ -14,7 +14,20 @@
     "@nomiclabs/hardhat-ethers": "^2.1.1",
     "ethers": "^5.0.0",
     "hardhat": "^2.10.2",
-    "prettier": "^2.7.1",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "prettier-plugin-solidity": "^1.0.0-beta.24"
+  },
+  "husky":
+  {
+    "hooks":{
+      "pre-commit":"lint-staged"
+    }
+  },
+  "lint-staged":{
+    "*.{js,json,css,md,html}":[
+      "prettier --single-quote --write",
+      "git add"
+    ]
   }
 }

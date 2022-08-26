@@ -1,27 +1,38 @@
 const { ethers } = require("hardhat");
 
 async function main() {
-  const [add1,add2,add3]=await ethers.getSigner();     
   const bankinfoContract  = await ethers.getContractFactory("bankinfo");
   const deployedbankinfoContract  = await bankinfoContract.deploy();
   await deployedbankinfoContract.deployed();
+  // const[addr1,addr22,addr3]=await ethers.getSigners();
 
+  await deployedbankinfoContract.setInfo(1,11,"nic",1200);
+  await deployedbankinfoContract.deposit(1,1000);
+  getdata=await deployedbankinfoContract.getDataOfUser();
+  console.log(getdata);
+  balance=await deployedbankinfoContract.getBalance(1);
+  console.log(balance);
+  await deployedbankinfoContract.transferAmount(1,2500,addr2.address,2);
 
-  const res=await deployedbankinfoContract.setInfo(1,2,"nc",12134);
-  await deployedbankinfoContract.deposit();
   
   console.log("datas :",res);
   
-  console.log(
+  console.log
+  
+  
+  (
     "deployed Contract Address:",deployedbankinfoContract.address );
 }
 
 main()
-  .then(() => process.exit(0))
+.then(() => process.exit(0))
   .catch((error) => {
     console.error(error);
     process.exit(1);
-  });
+});
+
+
+
 
 
 
