@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prettier-solidity": "npm prettier --write 'contracts/bakinfo.sol"
+    "prettier:solidity": "./node_modules/.bin/prettier --write contracts/**/*.sol"
   },
   "keywords": [],
   "author": "",
@@ -21,7 +21,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": ["npm prettier --write 'contracts/function.sol'"
+      "pre-commit": ["npm run prettier:solidity"
     ]
     }
   },
