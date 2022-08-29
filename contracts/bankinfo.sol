@@ -22,8 +22,8 @@ contract bankinfo {
         uint256 balance;
     }
     address public owner;
-    constructor()
-    {
+
+    constructor() {
         owner = msg.sender;
     }
 
@@ -35,8 +35,6 @@ contract bankinfo {
 
     mapping(address => mapping(uint256 => bankaccount))
         public mappedbankaccount;
-
-
 
     function setInfo(
         uint256 _number,
