@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier-solidity": "npm prettier --write 'contracts/bakinfo.sol"
   },
   "keywords": [],
   "author": "",
@@ -20,7 +21,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": ["npm prettier --write 'contracts/function.sol'"
+    ]
     }
   },
   "lint-staged": {
@@ -29,4 +31,7 @@
       "git add"
     ]
   }
+  
+ 
 }
+

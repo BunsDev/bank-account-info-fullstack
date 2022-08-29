@@ -4,10 +4,6 @@ async function main() {
   const bankinfoContract  = await ethers.getContractFactory("bankinfo");
   const deployedbankinfoContract  = await bankinfoContract.deploy();
   await deployedbankinfoContract.deployed();
- 
-
-  
-  
   
   console.log(
     "deployed Contract Address:",deployedbankinfoContract.address );
