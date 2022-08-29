@@ -53,13 +53,13 @@ contract bankinfo{
         mappedbankaccount[msg.sender][_number].balance-=_balance;   
     }
 
-    function getDataOfUser() public view returns(userdata[] memory )
-    {
-        
-        userdata[] memory muserdata= new userdata[](acNumbercount.length);
+            function getDataOfUser() public view returns(userdata[] memory )
+            {
+                
+                userdata[] memory muserdata= new userdata[](acNumbercount.length);
 
-        for(uint i=0;i<acNumbercount.length;i++)
-        {
+                for(uint i=0;i<acNumbercount.length;i++)
+ {
             
             if(mappedbankaccount[msg.sender][acNumbercount[i]].exists == true){
             userdata memory newuserdata=userdata(acNumbercount[i],mappedbankaccount[msg.sender][acNumbercount[i]].bank_name,mappedbankaccount[msg.sender][acNumbercount[i]].branch,mappedbankaccount[msg.sender][acNumbercount[i]].balance);
