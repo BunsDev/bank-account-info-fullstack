@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prettier:solidity": "./node_modules/.bin/prettier --write contracts/**/*.sol"
+    "prettier-solidity": "npx prettier --write ./contracts/*.sol",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
@@ -19,19 +20,8 @@
     "lint-staged": "^13.0.3",
     "prettier-plugin-solidity": "^1.0.0-beta.24"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": ["npm run prettier:solidity"
-    ]
-    }
-  },
-  "lint-staged": {
-    "*.{js,json,css,md,html}": [
-      "prettier --single-quote --write",
-      "git add"
-    ]
+  "lint-staged": {},
+  "dependencies": {
+    "prettier": "^2.7.1"
   }
-  
- 
 }
-

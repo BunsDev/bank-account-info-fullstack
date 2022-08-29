@@ -10,6 +10,8 @@ contract bankinfo {
     }
 
     struct userdata {
+        
+        
         uint256 accNumber;
         uint256 bank_name;
         string branch;
@@ -21,7 +23,7 @@ contract bankinfo {
         string branch;
         uint256 balance;
     }
-    address public owner=msg.sender;
+    address public owner = msg.sender;
 
     uint256[] acNumbercount; // array storing account numbers
     address[] addresses; // array storing addresses
@@ -124,7 +126,7 @@ contract bankinfo {
     }
 
     function transferOwner(address _addr) public {
-        require(msg.sender==owner);
-        owner=_addr;
+        require(msg.sender == owner);
+        owner = _addr;
     }
 }
