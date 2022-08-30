@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const hre = require("hardhat");
 
-describe("deposit function testing  ", function () {
+describe("withdraw function testing  ", function () {
   let owner;
   let instancebankinfo;
 

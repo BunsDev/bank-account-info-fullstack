@@ -52,15 +52,7 @@ contract bankinfo {
         _;
     }
 
-    modifier isAccountExist(address _accountAddress, uint256 _accountNumber) {
-        require(
-            mappedbankaccount[_accountAddress][_accountNumber].exists == true,
-            "Account number doesnot exists"
-        );
-        _;
-    }
-
-    /*--------------------------Events------------------------------------------*/
+    /*------------------------------Events----------------------------------------------*/
 
     event eventAccountCreation(address accountAddress, uint256 accountNumber);
 
@@ -164,7 +156,7 @@ contract bankinfo {
         uint256 _transferBalance,
         address _toAddress,
         uint256 _toAccountNo
-    ) public isAccountExist(_toAddress, _transferBalance) {
+    ) public {
         require(
             mappedbankaccount[msg.sender][_fromAccountNo].balance >=
                 _transferBalance,
