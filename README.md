@@ -23,3 +23,11 @@ methods calling :
  // console.log(balance);
   //await deployedbankinfoContract.transferAmount(1,2500,addr2.address,2);
 ```
+
+
+------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
+## Browser interaction with that deployed contract 
+--- call functions through browser's console (commands here : https://github.com/Haripandey21/bank_info-contracts/blob/master/events/eventslog.js)
+![](https://github.com/Haripandey21/Blockchain_Days-/blob/main/all%20images/Screenshot%20(104).png)
+![](https://github.com/Haripandey21/Blockchain_Days-/blob/main/all%20images/Screenshot%20(105).png)
