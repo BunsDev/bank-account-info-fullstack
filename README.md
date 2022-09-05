@@ -31,3 +31,15 @@ methods calling :
 --- call functions through browser's console (commands here : https://github.com/Haripandey21/bank_info-contracts/blob/master/events/eventslog.js)
 ![](https://github.com/Haripandey21/Blockchain_Days-/blob/main/all%20images/Screenshot%20(104).png)
 ![](https://github.com/Haripandey21/Blockchain_Days-/blob/main/all%20images/Screenshot%20(105).png)
+
+------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
+
+## UI interaction with the Smart- Contract 
+![](https://github.com/Haripandey21/Blockchain_Days-/blob/main/Screenshot%20(109).png)
+![](https://github.com/Haripandey21/Blockchain_Days-/blob/main/Screenshot%20(108).png)
+![](https://github.com/Haripandey21/Blockchain_Days-/blob/main/Screenshot%20(110).png)
+![](https://github.com/Haripandey21/Blockchain_Days-/blob/main/Screenshot%20(111).png)
+![](https://github.com/Haripandey21/Blockchain_Days-/blob/main/Screenshot%20(112).png)
+![](https://github.com/Haripandey21/Blockchain_Days-/blob/main/Screenshot%20(113).png)
+![](https://github.com/Haripandey21/Blockchain_Days-/blob/main/Screenshot%20(114).png)
