@@ -23,6 +23,7 @@
   },
   "lint-staged": {},
   "dependencies": {
-    "prettier": "^2.7.1"
+    "prettier": "^2.7.1",
+    "web3": "^1.7.5"
   }
 }
