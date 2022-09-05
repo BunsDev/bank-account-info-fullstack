@@ -2,8 +2,6 @@
 pragma solidity ^0.8.9;
 
 contract bankinfo {
-
-
     struct bankaccount {
         uint256 bank_name;
         string branch;
