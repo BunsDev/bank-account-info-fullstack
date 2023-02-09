@@ -1,22 +1,22 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-contract bankinfo {
-    struct bankaccount {
-        uint256 bank_name;
+contract BankInfo {
+    struct BankAccount {
+        uint256 bankName;
         string branch;
         uint256 balance;
         bool exists;
     }
 
-    struct userdata {
+    struct UserData {
         uint256 accNumber;
-        uint256 bank_name;
+        uint256 bankName;
         string branch;
         uint256 balance;
     }
 
-    struct bankdata {
+    struct BankData {
         uint256 accNumber;
         string branch;
         uint256 balance;
@@ -30,60 +30,48 @@ contract bankinfo {
     uint256[] accounts; // array storing account numbers
     address[] addresses; // array storing addresses
 
-    userdata[] public arrayuserdata;
-    bankdata[] public arraybankdata;
-
-    mapping(address => mapping(uint256 => bankaccount))
-        public mappedbankaccount;
+    mapping(address => mapping(uint256 => BankAccount))
+        public mappedBankAccount;
 
     /*----------------------------------modidiers---------------------------------------------*/
-    modifier accountAlreadyExist(uint256 _acNumber) {
-        bool check;
-        for (uint256 i = 0; i < accounts.length; i++) {
-            if (accounts[i] == _acNumber) {
-                check = true;
-                break;
-            }
-        }
+    modifier accountAlreadyExist(address _address,uint256 _acNumber) {
         require(
-            check == false,
-            "Account already exists,please Change your Account Number"
+            !mappedBankAccount[_address][_acNumber].exists,
+            "Account already exists"
         );
         _;
     }
 
-    /*------------------------------Events----------------------------------------------*/
+    // -Events----------------------------------------------*/
+    event EventAccountCreation(address accountAddress, uint256 accountNumber);
 
-    event eventAccountCreation(address accountAddress, uint256 accountNumber);
-
-    event eventBalanceDeposit(
+    event EventBalanceDeposit(
         address accountAddress,
         uint256 accountNumber,
         uint256 depositedBalance
     );
 
-    event eventBalanceTransfer(
+    event EventBalanceTransfer(
         uint256 accountFrom,
         uint256 accountTo,
         uint256 transferedBalance
     );
 
-    event eventBalanceWithdraw(
+    event EventBalanceWithdraw(
         address accountAddress,
         uint256 accountNumber,
         uint256 withdrawlBalance
     );
 
-    event eventAdminChange(address newAdmin);
-
+    event EventAdminChange(address newAdmin);
     /*----------------------------------------functions -------------------------------------------------*/
     function setInfo(
         uint256 _accountNumber,
         uint256 _bank,
         string memory _branch,
         uint256 _balance
-    ) public accountAlreadyExist(_accountNumber) {
-        mappedbankaccount[msg.sender][_accountNumber] = bankaccount(
+    ) public accountAlreadyExist(msg.sender,_accountNumber) {
+        mappedBankAccount[msg.sender][_accountNumber] = BankAccount(
             _bank,
             _branch,
             _balance,
@@ -91,64 +79,64 @@ contract bankinfo {
         );
         accounts.push(_accountNumber);
         addresses.push(msg.sender);
-        emit eventAccountCreation(msg.sender, _accountNumber);
+        emit EventAccountCreation(msg.sender, _accountNumber);
     }
 
     function deposit(uint256 _accountNumber, uint256 _depositBalance) public {
-        mappedbankaccount[msg.sender][_accountNumber]
+        mappedBankAccount[msg.sender][_accountNumber]
             .balance += _depositBalance;
-        emit eventBalanceDeposit(msg.sender, _accountNumber, _depositBalance);
+        emit EventBalanceDeposit(msg.sender, _accountNumber, _depositBalance);
     }
 
-    function withdraw(uint256 _accountNumber, uint256 _withdrawBalance) public {
-        mappedbankaccount[msg.sender][_accountNumber]
-            .balance -= _withdrawBalance;
-        emit eventBalanceWithdraw(msg.sender, _accountNumber, _withdrawBalance);
+    function withDraw(uint256 _accountNumber, uint256 _withDrawBalance) public {
+        mappedBankAccount[msg.sender][_accountNumber]
+            .balance -= _withDrawBalance;
+        emit EventBalanceWithdraw(msg.sender, _accountNumber, _withDrawBalance);
     }
 
-    function getDataOfUser() public view returns (userdata[] memory) {
-        userdata[] memory muserdata = new userdata[](accounts.length); //new array
+    function getDataOfUser() public view returns (UserData[] memory) {
+        UserData[] memory mUserData = new UserData[](accounts.length); //new array
 
         for (uint256 i = 0; i < accounts.length; i++) {
-            if (mappedbankaccount[msg.sender][accounts[i]].exists == true) {
-                userdata memory newuserdata = userdata(
+            if (mappedBankAccount[msg.sender][accounts[i]].exists) {
+                UserData memory newUserData = UserData(
                     accounts[i],
-                    mappedbankaccount[msg.sender][accounts[i]].bank_name,
-                    mappedbankaccount[msg.sender][accounts[i]].branch,
-                    mappedbankaccount[msg.sender][accounts[i]].balance
+                    mappedBankAccount[msg.sender][accounts[i]].bankName,
+                    mappedBankAccount[msg.sender][accounts[i]].branch,
+                    mappedBankAccount[msg.sender][accounts[i]].balance
                 ); // new struct to store data
-                muserdata[i] = newuserdata;
+                mUserData[i] = newUserData;
             }
         }
-        return muserdata;
+        return mUserData;
     }
 
     function getDataOfBank(uint256 _name)
         public
         view
-        returns (bankdata[] memory)
+        returns (BankData[] memory)
     {
         uint256 count;
-        bankdata[] memory mbankdata = new bankdata[](accounts.length); // new array to store struct
+        BankData[] memory mBankData = new BankData[](accounts.length); // new array to store struct
 
         for (uint256 i = 0; i < addresses.length; i++) {
             for (uint256 j = 0; j < accounts.length; j++) {
                 if (
-                    mappedbankaccount[addresses[i]][accounts[j]].bank_name ==
+                    mappedBankAccount[addresses[i]][accounts[j]].bankName ==
                     _name
                 ) {
                     // new struct to store data
-                    bankdata memory newbankdata = bankdata(
+                    BankData memory newBankData = BankData(
                         accounts[j],
-                        mappedbankaccount[addresses[i]][accounts[j]].branch,
-                        mappedbankaccount[addresses[i]][accounts[j]].balance
+                        mappedBankAccount[addresses[i]][accounts[j]].branch,
+                        mappedBankAccount[addresses[i]][accounts[j]].balance
                     );
-                    mbankdata[i] = newbankdata;
+                    mBankData[i] = newBankData;
                     count++;
                 }
             }
         }
-        return mbankdata;
+        return mBankData;
     }
 
     function tranferAmount(
@@ -158,14 +146,14 @@ contract bankinfo {
         uint256 _toAccountNo
     ) public {
         require(
-            mappedbankaccount[msg.sender][_fromAccountNo].balance >=
+            mappedBankAccount[msg.sender][_fromAccountNo].balance >=
                 _transferBalance,
             "insufficient balance"
         );
-        mappedbankaccount[_toAddress][_toAccountNo].balance += _transferBalance;
-        mappedbankaccount[msg.sender][_fromAccountNo]
+        mappedBankAccount[_toAddress][_toAccountNo].balance += _transferBalance;
+        mappedBankAccount[msg.sender][_fromAccountNo]
             .balance -= _transferBalance;
-        emit eventBalanceTransfer(
+        emit EventBalanceTransfer(
             _fromAccountNo,
             _toAccountNo,
             _transferBalance
@@ -173,15 +161,18 @@ contract bankinfo {
     }
 
     function getBalance(uint256 _acno) public view returns (uint256) {
-        return mappedbankaccount[msg.sender][_acno].balance;
+        return mappedBankAccount[msg.sender][_acno].balance;
     }
 
-    function transferOwner(address _newAdminaddr) public {
+    function transferOwner(address _newAdminAddr) public {
+        if(_newAdminAddr!=address(0))
+        {
         require(
             msg.sender == owner,
-            "Permission denied as you are not owner of this Account"
+            "You are not owner of this Account"
         );
-        owner = _newAdminaddr;
-        emit eventAdminChange(_newAdminaddr);
+        owner = _newAdminAddr;
+        emit EventAdminChange(_newAdminAddr);
     }
-}
+    }
+} 
